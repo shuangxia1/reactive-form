@@ -1,3 +1,47 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h4>Add Permission</h4>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="save(myForm)">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" formControlName="name">
+          <label>description</label>
+          <input type="text" class="form-control" formControlName="description">
+          <label>Status</label>
+          <input type="text" class="form-control" formControlName="status">
+        </div>
+        <!--permissions-->
+        <div formArrayName="permissions">
+          <div *ngFor="let permission of myForm.controls.permissions.controls; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+              <span>Permission {{i + 1}}</span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.permissions.controls.length > 1" (click)="removePermission(i)"></span>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+              <permission [group]="myForm.controls.permissions.controls[i]"></permission>
+            </div>
+          </div>
+        </div>
+
+        <div class="margin-20">
+          <a (click)="addPermission()" style="cursor: default">
+            Add another permission +
+          </a>
+        </div>
+
+        <div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right">Submit</button>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="margin-20">
+          <div>myForm details:-</div>
+          <pre>form value: <br>{{myForm.value | json}}</pre>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
