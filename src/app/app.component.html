@@ -18,7 +18,7 @@
           <div *ngFor="let permission of myForm.controls.permissions.controls; let i=index" class="panel panel-default">
             <div class="panel-heading">
               <span>Permission {{i + 1}}</span>
-              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.permissions.controls.length > 1" (click)="removePermission(i)"></span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.permissions.controls.length > 1" (click)="removePermission(i)">X</span>
             </div>
             <div class="panel-body" [formGroupName]="i">
               <permission [group]="myForm.controls.permissions.controls[i]"></permission>
